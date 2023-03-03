@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    volumes:
+      - ./src:/code/app
+    ports:
+      - 8008:8000

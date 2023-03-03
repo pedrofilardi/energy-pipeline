@@ -1,0 +1,39 @@
+version: '2'
+services:
+  
+  db_energy:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      
+    ports:
+      - 5432:5432
+    volumes:
+      - './postgres/postgres_db:/var/lib/postgresql/data'
+      - ./postgres/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+    networks:
+      - postgres_network
+    
+
+  pg_admin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pedroviv@ucm.es
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 80:80
+    volumes: 
+      - './postgres/pg_admin:/var/lib/pgadmin'
+    networks:
+      - postgres_network
+    
+volumes:
+  postgres: 
+  
+networks:
+  postgres_network:
+    name: postgres_network
