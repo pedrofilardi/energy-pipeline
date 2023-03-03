@@ -22,7 +22,7 @@ services:
     image: dpage/pgadmin4
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: pedroviv@ucm.es
+      PGADMIN_DEFAULT_EMAIL: email
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - 80:80
