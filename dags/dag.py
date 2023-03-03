@@ -58,7 +58,7 @@ def _retrieve_metadata(country: str, ti) -> None:
             WHERE last = 1 and country.ISO2 = '{country}';'''
 
     postgres_hook = PostgresHook(
-        postgres_conn_id="postgres_ruben", schema="postgres")
+        postgres_conn_id="postgres_conn", schema="postgres")
     conn = postgres_hook.get_conn()
     cursor = conn.cursor()
     cursor.execute(sql)
@@ -134,7 +134,7 @@ def _load_data(country: str, ti):
 
     # load dates dimension
     postgres_hook = PostgresHook(
-        postgres_conn_id="postgres_ruben", schema="postgres")
+        postgres_conn_id="postgres_conn", schema="postgres")
     conn = postgres_hook.get_conn()
     cursor = conn.cursor()
     cursor.execute(
@@ -184,7 +184,7 @@ def _reset_flag(country: str, ti) -> None:
     last_row = ti.xcom_pull(key=country, task_ids=f"transform_data_{country}")
 
     postgres_hook = PostgresHook(
-        postgres_conn_id="postgres_ruben", schema="postgres")
+        postgres_conn_id="postgres_conn", schema="postgres")
     conn = postgres_hook.get_conn()
     cursor = conn.cursor()
 
